@@ -30,20 +30,17 @@ object ArrayHopper {
         return max;
     }*/
 
+  // TODO: Is it possible to remove base? (and use acc.head)
   def findHops(numbers: List[Int], acc: List[Int] = Nil, base: Int = 0): List[Int] = numbers match {
     case Nil => acc.reverse
     case 0::_ => Nil
-    case x::xs => findHops(xs.drop(x-1), base :: acc, base + x)
-  }
-
-  private def findHops2(numbers: List[Int], base: Int, hops: List[Int]): List[Int] = numbers match {
-    case Nil => hops
+    case x::Nil => findHops(Nil, base :: acc, base + x)
     case x::xs =>
-      val hop = findMaxIndexPlusValue(xs.slice(0, (base + x).max(xs.size)))
-      findHops2(xs, base + hop, base :: hops.drop(hop))
+      val hop = findMaxIndexPlusValue(xs.slice(0, (base + x).min(xs.size)))
+      findHops(xs.drop(hop), base :: acc, base + hop + 1)
   }
 
   private def findMaxIndexPlusValue(numbers: List[Int]): Int =
-    numbers.zipWithIndex.maxBy { case (v, i) => v + i }._1
+    numbers.zipWithIndex.maxBy { case (v, i) => v + i }._2
 
 }

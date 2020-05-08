@@ -31,10 +31,11 @@ object ArrayHopper {
     }*/
 
   // TODO: Is it possible to remove base? (and use acc.head)
+  // TODO: case Nil => Nil can be extracted?
   def findHops(numbers: List[Int], acc: List[Int] = Nil, base: Int = 0): List[Int] = numbers match {
-    case Nil => acc.reverse
+    case Nil => Nil
     case 0::_ => Nil
-    case x::Nil => findHops(Nil, base :: acc, base + x)
+    case x::Nil => (base :: acc).reverse
     case x::xs =>
       val hop = findMaxIndexPlusValue(xs.slice(0, (base + x).min(xs.size)))
       findHops(xs.drop(hop), base :: acc, base + hop + 1)

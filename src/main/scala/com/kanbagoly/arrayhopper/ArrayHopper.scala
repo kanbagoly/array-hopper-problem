@@ -30,10 +30,10 @@ object ArrayHopper {
         return max;
     }*/
 
-  def findHops(numbers: List[Int]): List[Int] = numbers match {
+  def findHops(numbers: List[Int], base: Int = 0): List[Int] = numbers match {
     case Nil => Nil
     case 0::_ => Nil
-    case _::_ => List(0)
+    case x::xs => base :: findHops(xs, base + x)
   }
 
   private def findHops2(numbers: List[Int], base: Int, hops: List[Int]): List[Int] = numbers match {

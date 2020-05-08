@@ -13,6 +13,9 @@ class ArrayHopperSpec extends AnyWordSpecLike with Matchers {
       "the array only contains [0]" in {
         ArrayHopper.findHops(List(0)) should be(empty)
       }
+      "the array has a gap like [1, 0, 1]" in {
+        ArrayHopper.findHops(List(1, 0, 1)) should be(empty)
+      }
     }
     "return all indices" when {
       "the array contains one element of [1]" in {

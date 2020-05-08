@@ -33,7 +33,7 @@ object ArrayHopper {
   def findHops(numbers: List[Int], acc: List[Int] = Nil, base: Int = 0): List[Int] = numbers match {
     case Nil => acc.reverse
     case 0::_ => Nil
-    case x::xs => findHops(xs, base :: acc, base + x)
+    case x::xs => findHops(xs.drop(x-1), base :: acc, base + x)
   }
 
   private def findHops2(numbers: List[Int], base: Int, hops: List[Int]): List[Int] = numbers match {

@@ -3,6 +3,7 @@ package com.kanbagoly.arrayhopper
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpecLike
 
+// TODO: Provide as small tests as possible
 class ArrayHopperSpec extends AnyWordSpecLike with Matchers {
 
   "array hopper" should {
@@ -13,7 +14,7 @@ class ArrayHopperSpec extends AnyWordSpecLike with Matchers {
       "the array only contains [0]" in {
         ArrayHopper.findHops(List(0)) should be(empty)
       }
-      "the array has a gap like [1, 0, 1]" in {
+      "the array has an unjumpable gap like [1, 0, 1]" in {
         ArrayHopper.findHops(List(1, 0, 1)) should be(empty)
       }
     }
@@ -25,11 +26,14 @@ class ArrayHopperSpec extends AnyWordSpecLike with Matchers {
         ArrayHopper.findHops(List(1, 1, 1)) should be(List(0, 1, 2))
       }
     }
-//    "return indices of [0, 5, 9]" when {
-//      "the array contains the given example of [5, 6, 0, 4, 2, 4, 1, 0, 0, 4]" in {
-//        ArrayHopper.findHops(List(5, 6, 0, 4, 2, 4, 1, 0, 0, 4)) should be(List(0, 5, 9))
-//      }
-//    }
+    "return appropriate indices" when {
+      "the array has a jumpable gap like [2, 0, 1]" in {
+        ArrayHopper.findHops(List(2, 0, 1)) should be(List(0, 2))
+      }
+      //      "the array contains the given example of [5, 6, 0, 4, 2, 4, 1, 0, 0, 4]" in {
+      //        ArrayHopper.findHops(List(5, 6, 0, 4, 2, 4, 1, 0, 0, 4)) should be(List(0, 5, 9))
+      //      }
+    }
   }
 
 }

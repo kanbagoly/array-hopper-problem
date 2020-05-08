@@ -35,7 +35,7 @@ object ArrayHopper {
   def findHops(numbers: List[Int], acc: List[Int] = Nil, base: Int = 0): List[Int] = numbers match {
     case Nil => Nil
     case 0::_ => Nil
-    case x::Nil => (base :: acc).reverse
+    case _::Nil => (base :: acc).reverse
     case x::xs =>
       val hop = findMaxIndexPlusValue(xs.slice(0, (base + x).min(xs.size)))
       findHops(xs.drop(hop), base :: acc, base + hop + 1)

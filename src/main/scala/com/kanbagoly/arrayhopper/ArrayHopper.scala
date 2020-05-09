@@ -32,22 +32,13 @@ object ArrayHopper {
 
   // TODO: Is it possible to remove base? (and use acc.head)
   // TODO: case Nil => Nil can be extracted?
-  // TODO: Test for min(xs.size) (do we need it?)
-  // TODO: slice -> take
   def findHops(numbers: List[Int], acc: List[Int] = Nil, base: Int = 0): List[Int] = numbers match {
-    case Nil =>
-      acc.reverse
-    case 0::_ =>
-      Nil
-    case _::Nil =>
-      (base :: acc).reverse
-    case x::xs if xs.size < x =>
-      (base :: acc).reverse
+    case Nil => acc.reverse
+    case 0::_ => Nil
+    case x::xs if xs.size < x => (base :: acc).reverse
     case x::xs =>
-      val hop = findMaxIndexPlusValue(xs.slice(0, (base + x).min(xs.size)))
-      //val hop = findMaxIndexPlusValue(xs.take((base + x).min(xs.size)))
-      val newNumbers = xs.drop(hop)
-      findHops(newNumbers, base :: acc, base + hop + 1)
+      val hop = findMaxIndexPlusValue(xs.take(base + x))
+      findHops(xs.drop(hop), base :: acc, base + hop + 1)
   }
 
   private def findMaxIndexPlusValue(numbers: List[Int]): Int =

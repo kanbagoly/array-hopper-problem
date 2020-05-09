@@ -1,6 +1,7 @@
 package com.kanbagoly.arrayhopper
 
 import java.io.{ByteArrayOutputStream, StringReader}
+import java.lang.System.lineSeparator
 
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpecLike
@@ -50,10 +51,10 @@ class ArrayHopperSpec extends AnyWordSpecLike with Matchers {
   private def findHops(array: Int*): String = {
     val out = new ByteArrayOutputStream()
     Console.withOut(out) {
-      Console.withIn(new StringReader(array.mkString(System.lineSeparator))) {
+      Console.withIn(new StringReader(array.mkString(lineSeparator))) {
         ArrayHopper.main(Array.empty[String])
       }
     }
-    out.toString.replace(System.lineSeparator(), "")
+    out.toString.replace(lineSeparator(), "")
   }
 }

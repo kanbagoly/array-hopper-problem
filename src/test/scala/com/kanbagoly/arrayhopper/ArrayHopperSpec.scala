@@ -30,6 +30,9 @@ class ArrayHopperSpec extends AnyWordSpecLike with Matchers {
       "the array has a jumpable gap like [2, 0, 1]" in {
         ArrayHopper.findHops(List(2, 0, 1)) should be(List(0, 2))
       }
+      "the array has bigger jumpable gap then the size of the rest of the array [2, 0]" in {
+        ArrayHopper.findHops(List(2, 0)) should be(List(0))
+      }
       "the array has a better element to choose than to jump a maximum like [2, 3, 1, 1, 1]" in {
         ArrayHopper.findHops(List(2, 3, 1, 1, 1)) should be(List(0, 1, 4))
       }

@@ -32,6 +32,8 @@ object ArrayHopper {
 
   // TODO: Is it possible to remove base? (and use acc.head)
   // TODO: case Nil => Nil can be extracted?
+  // TODO: Test for min(xs.size) (do we need it?)
+  // TODO: slice -> take
   def findHops(numbers: List[Int], acc: List[Int] = Nil, base: Int = 0): List[Int] = numbers match {
     case Nil => Nil
     case 0::_ => Nil

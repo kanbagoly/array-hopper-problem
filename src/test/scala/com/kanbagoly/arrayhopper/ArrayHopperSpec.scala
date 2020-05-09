@@ -11,15 +11,14 @@ class ArrayHopperSpec extends AnyWordSpecLike with Matchers {
   "array hopper" should {
     "return no indices" when {
       "the array is empty" in {
-        //ArrayHopper.findHops(Nil) should be(empty)
-
-        val in = new StringReader("")
-        val out = execute(in)
-        out.toString should include("failure")
-
+        val stdin = new StringReader("")
+        val stdout = execute(stdin)
+        stdout.toString should include("failure")
       }
       "the array only contains [0]" in {
-        ArrayHopper.findHops(List(0)) should be(empty)
+        val stdin = new StringReader("0")
+        val stdout = execute(stdin)
+        stdout.toString should include("failure")
       }
       "the array has an unjumpable gap like [1, 0, 1]" in {
         ArrayHopper.findHops(List(1, 0, 1)) should be(empty)

@@ -22,8 +22,12 @@ class ArrayHopperSpec extends AnyWordSpecLike with Matchers {
       "the array contains one element of [1]" in {
         ArrayHopper.findHops(List(1)) should be(List(0))
       }
-      "the array contains more element of [1, 1, 1]" in {
-        ArrayHopper.findHops(List(1, 1, 1)) should be(List(0, 1, 2))
+      "the array contains more elements of [1, 1, 1]" in {
+        ArrayHopper.findHops(List(1, 1, 1, 1, 1)) should be(List(0, 1, 2, 3, 4))
+      }
+      "the array contains lot of ones of [1, 1, 1, 1, 1]" in {
+        // TODO: Delete
+        ArrayHopper.findHops(List(1, 1, 1, 1, 1)) should be(List(0, 1, 2, 3, 4))
       }
     }
     "return appropriate indices" when {

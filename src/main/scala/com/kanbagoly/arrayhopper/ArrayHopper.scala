@@ -37,7 +37,7 @@ object ArrayHopper {
     case 0::_ => Nil
     case x::xs if xs.size < x => (base :: acc).reverse
     case x::xs =>
-      val hop = findMaxIndexPlusValue(xs.take(base + x))
+      val hop = findMaxIndexPlusValue(xs take x)
       findHops(xs.drop(hop), base :: acc, base + hop + 1)
   }
 

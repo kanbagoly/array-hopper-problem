@@ -1,15 +1,22 @@
 package com.kanbagoly.arrayhopper
 
+import java.io.{ByteArrayOutputStream, StringReader}
+
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpecLike
 
-// TODO: Provide as small tests as possible
+
 class ArrayHopperSpec extends AnyWordSpecLike with Matchers {
 
   "array hopper" should {
     "return no indices" when {
       "the array is empty" in {
-        ArrayHopper.findHops(Nil) should be(empty)
+        //ArrayHopper.findHops(Nil) should be(empty)
+
+        val in = new StringReader("")
+        val out = execute(in)
+        out.toString should include("failure")
+
       }
       "the array only contains [0]" in {
         ArrayHopper.findHops(List(0)) should be(empty)
@@ -46,4 +53,13 @@ class ArrayHopperSpec extends AnyWordSpecLike with Matchers {
     }
   }
 
+  private def execute(in: StringReader): ByteArrayOutputStream = {
+    val out = new ByteArrayOutputStream()
+    Console.withOut(out) {
+      Console.withIn(in) {
+        ArrayHopper.main(Array.empty[String])
+      }
+    }
+    out
+  }
 }

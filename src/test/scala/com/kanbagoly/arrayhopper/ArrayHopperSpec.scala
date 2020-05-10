@@ -14,6 +14,12 @@ class ArrayHopperSpec extends AnyWordSpecLike with Matchers {
       "the array is empty" in {
         findHops() should be("failure")
       }
+      "the array contains negative number" in {
+        findHops(-1) should be("failure")
+      }
+      "the array contains a non integer" in {
+        findHops("NaN") should be("failure")
+      }
       "the array only contains [0]" in {
         findHops(0) should be("failure")
       }
@@ -48,7 +54,7 @@ class ArrayHopperSpec extends AnyWordSpecLike with Matchers {
     }
   }
 
-  private def findHops(array: Int*): String = {
+  private def findHops(array: Any*): String = {
     val out = new ByteArrayOutputStream()
     Console.withOut(out) {
       Console.withIn(new StringReader(array.mkString(lineSeparator))) {

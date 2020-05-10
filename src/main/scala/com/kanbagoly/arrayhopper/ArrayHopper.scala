@@ -6,8 +6,10 @@ import scala.io.StdIn
 object ArrayHopper {
 
   def main(args: Array[String]): Unit = {
-    val canyon = readNumbers()
-    val flights = findHops(canyon)
+    val flights = readNumbers().partitionMap(identity) match {
+      case (Nil, numbers) => findHops(numbers)
+      case (_, _) => Nil
+    }
     println(prepareOutput(flights))
   }
 
@@ -24,8 +26,16 @@ object ArrayHopper {
   private def findMaxIndexPlusValue(numbers: List[Int]): Int =
     numbers.zipWithIndex.maxBy { case (v, i) => v + i }._2
 
-  private def readNumbers(): List[Int] =
-    Iterator.continually(StdIn.readLine()).takeWhile(_ != null).map(_.toInt).toList
+  private def readNumbers(): List[Either[NumberFormatException, Int]] =
+    Iterator.continually(StdIn.readLine()).takeWhile(_ != null).map(toNonNegativeInt).toList
+
+  private def toNonNegativeInt(number: String): Either[NumberFormatException, Int] =
+    try {
+      val int = number.toInt
+      if (int < 0) Left(new NumberFormatException("negative number")) else Right(int)
+    } catch {
+      case nfe: NumberFormatException => Left(nfe)
+    }
 
   private def prepareOutput(numbers: List[Int]): String = numbers match {
     case Nil => "failure"

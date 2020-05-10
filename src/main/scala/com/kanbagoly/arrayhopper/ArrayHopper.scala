@@ -7,6 +7,7 @@ object ArrayHopper {
 
   def main(args: Array[String]): Unit = {
     val flights = readNumbers().partitionMap(identity) match {
+      case (_, Nil) => Nil
       case (Nil, numbers) => findHops(numbers)
       case (_, _) => Nil
     }
@@ -15,7 +16,6 @@ object ArrayHopper {
 
   @tailrec
   private def findHops(numbers: List[Int], acc: List[Int] = Nil, offset: Int = 0): List[Int] = numbers match {
-    case Nil => Nil
     case 0::_ => Nil
     case x::xs if xs.size < x => (offset :: acc).reverse
     case x::xs =>

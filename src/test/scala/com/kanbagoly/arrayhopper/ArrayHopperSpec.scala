@@ -34,9 +34,6 @@ class ArrayHopperSpec extends AnyWordSpecLike with Matchers {
       "the array contains more elements of [1, 1, 1]" in {
         findHops(1, 1, 1) should be("0, 1, 2, out")
       }
-      "the array contains lot of ones of [1, 1, 1, 1, 1]" in {
-        findHops(1, 1, 1, 1, 1) should be("0, 1, 2, 3, 4, out")
-      }
     }
     "return appropriate indices" when {
       "the array has a jumpable gap like [2, 0, 1]" in {
@@ -45,7 +42,7 @@ class ArrayHopperSpec extends AnyWordSpecLike with Matchers {
       "the array has bigger jumpable gap then the size of the rest of the array [2, 0]" in {
         findHops(2, 0) should be("0, out")
       }
-      "the array has a better element to choose than to jump a maximum like [2, 3, 1, 1, 1]" in {
+      "the array has a better element to choose than the initial jump, like [2, 3, 1, 1, 1]" in {
         findHops(2, 3, 1, 1, 1) should be("0, 1, 4, out")
       }
       "the array contains the given example of [5, 6, 0, 4, 2, 4, 1, 0, 0, 4]" in {

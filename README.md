@@ -1,7 +1,7 @@
 # array-hopper-problem
 A solution of the Array Hopper challenge in Scala
 
-#other known names
+## other known names
 Array Hopper, Dungeoneering V1, Dragon Challenge
 
 ## problem description

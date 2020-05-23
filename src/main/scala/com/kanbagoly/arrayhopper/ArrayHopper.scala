@@ -7,9 +7,8 @@ object ArrayHopper {
 
   def main(args: Array[String]): Unit = {
     val flights = readNumbers().partitionMap(identity) match {
-      case (_, Nil) => Nil
-      case (Nil, numbers) => findHops(numbers)
-      case (_, _) => Nil
+      case (Nil, numbers@_::_) => findHops(numbers)
+      case _ => Nil
     }
     println(prepareOutput(flights))
   }

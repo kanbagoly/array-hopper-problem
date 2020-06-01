@@ -16,14 +16,12 @@ object ArrayHopper {
 
   @tailrec
   private def findHops(numbers: List[Int], acc: List[Int] = Nil, offset: Int = 0): List[Int] = numbers match {
+    case Nil => acc.reverse
     case 0::_ => Nil
     case x::xs =>
       val horizon = xs take x
-      if (horizon.size < x) (offset :: acc).reverse
-      else {
-        val jump = findMaxIndexPlusValue(horizon)
-        findHops(xs drop jump, offset :: acc, offset + jump + 1)
-      }
+      val jump = if (horizon.size < x) x else findMaxIndexPlusValue(horizon)
+      findHops(xs drop jump, offset :: acc, offset + jump + 1)
   }
 
   private def findMaxIndexPlusValue(numbers: List[Int]): Int =

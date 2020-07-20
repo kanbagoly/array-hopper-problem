@@ -28,7 +28,7 @@ object ArrayHopper {
     numbers.zipWithIndex.maxBy { case (v, i) => v + i }._2
 
   private def readNumbers(): List[Try[Int]] =
-    Iterator.continually(StdIn.readLine()).takeWhile(_ != null).map(toNonNegativeInt).toList
+    Iterator.continually(StdIn.readLine()).takeWhile(_ ne null).map(toNonNegativeInt).toList
 
   private def toNonNegativeInt(number: String): Try[Int] = Try { requireNonNegative(number.toInt) }
 

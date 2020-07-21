@@ -54,8 +54,8 @@ class ArrayHopperSpec extends AnyWordSpecLike with Matchers {
   private def findHops(array: Any*): String = {
     val out = new ByteArrayOutputStream()
     Console.withOut(out) {
-      Console.withIn(new StringReader(array.mkString(lineSeparator))) {
-        ArrayHopper.main(Array.empty[String])
+      Console.withIn(new StringReader(array mkString lineSeparator())) {
+        ArrayHopper.main(Array.empty)
       }
     }
     out.toString.replace(lineSeparator(), "")

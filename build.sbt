@@ -1,7 +1,10 @@
-name := "array-hopper-problem"
+ThisBuild / version := "0.1"
 
-version := "0.1"
+ThisBuild / scalaVersion := "3.2.2"
 
-scalaVersion := "2.13.10"
+lazy val root = (project in file("."))
+  .settings(
+    name := "array-hopper-problem"
+  )
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.15" % Test

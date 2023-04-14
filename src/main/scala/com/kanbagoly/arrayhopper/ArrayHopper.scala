@@ -6,23 +6,20 @@ import scala.util.Try
 
 object ArrayHopper {
 
-  def main(args: Array[String]): Unit = {
-    val flights = readNumbers().partitionMap(_.toEither) match {
+  def main(args: Array[String]): Unit =
+    val flights = readNumbers().partitionMap(_.toEither) match
       case (Nil, numbers@_::_) => findHops(numbers)
       case _ => Nil
-    }
     println(prepareOutput(flights))
-  }
 
   @tailrec
-  private def findHops(numbers: List[Int], acc: List[Int] = Nil, offset: Int = 0): List[Int] = numbers match {
+  private def findHops(numbers: List[Int], acc: List[Int] = Nil, offset: Int = 0): List[Int] = numbers match
     case Nil => acc.reverse
     case 0::_ => Nil
     case x::xs =>
       val horizon = xs take x
       val jump = if (horizon.size < x) x else findMaxIndexPlusValue(horizon)
       findHops(xs drop jump, offset :: acc, offset + jump + 1)
-  }
 
   private def findMaxIndexPlusValue(numbers: List[Int]): Int =
     numbers.zipWithIndex.maxBy { case (v, i) => v + i }._2
@@ -35,9 +32,8 @@ object ArrayHopper {
   private def requireNonNegative(number: Int): Int =
     if (number < 0) throw new NumberFormatException("negative number") else number
 
-  private def prepareOutput(numbers: List[Int]): String = numbers match {
+  private def prepareOutput(numbers: List[Int]): String = numbers match
     case Nil => "failure"
     case xs => xs.mkString("", ", ", ", out")
-  }
 
 }

@@ -4,7 +4,7 @@ import scala.annotation.tailrec
 import scala.io.StdIn
 import scala.util.Try
 
-object ArrayHopper {
+object ArrayHopper:
 
   def main(args: Array[String]): Unit =
     val flights = readNumbers().partitionMap(_.toEither) match
@@ -35,5 +35,3 @@ object ArrayHopper {
   private def prepareOutput(numbers: List[Int]): String = numbers match
     case Nil => "failure"
     case xs => xs.mkString("", ", ", ", out")
-
-}
